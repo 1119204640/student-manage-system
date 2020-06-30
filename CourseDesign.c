@@ -145,7 +145,7 @@ void readscore(struct STUDENT stu[])
 void showscore(struct STUDENT stu[])
 {
     int input_ornot = 0;
-    for (int i = 0; i < 100; i++)
+    for (int i = 0; i < N; i++)
     {   
         if (stu[i].number != 0 && stu[i].number != -1)
         {
@@ -179,7 +179,7 @@ void showscore(struct STUDENT stu[])
 int rank(struct STUDENT stu[])
 {
     int input_ornot = 0;
-    for (int i = 0; i < 100; i++)
+    for (int i = 0; i < N; i++)
     {   
         if (stu[i].number != 0 && stu[i].number != -1)
         {
@@ -196,7 +196,7 @@ int rank(struct STUDENT stu[])
         struct STUDENT t;      //t为临时变量存放结构
         int len;
         int count = 0;
-        for (int k = 0; k < 100; k++)
+        for (int k = 0; k < N; k++)
         {
             if (stu[k].number == -1)
             {
@@ -215,7 +215,7 @@ int rank(struct STUDENT stu[])
                 }
             }
         }
-        for (int i = 0; i < 100; i++)
+        for (int i = 0; i < N; i++)
         {
             for (int j = 1; i - j >= 0; j++)
             {
@@ -235,7 +235,7 @@ int rank(struct STUDENT stu[])
 void seek(struct STUDENT stu[])
 {
     int input_ornot = 0;
-    for (int i = 0; i < 100; i++)
+    for (int i = 0; i < N; i++)
     {   
         if (stu[i].number != 0 && stu[i].number != -1)
         {
@@ -261,7 +261,7 @@ void seek(struct STUDENT stu[])
                 break;
             }
             rank(stu);
-            for (int i = 0; i < 100; i++)
+            for (int i = 0; i < N; i++)
             {
                 if (stu[i].number == target)
                 {
@@ -295,7 +295,7 @@ void delete(struct STUDENT stu[], long long int delete_number)
 {
     int find_ornot = 0;
     int input_ornot = 0;
-    for (int i = 0; i < 100; i++)
+    for (int i = 0; i < N; i++)
     {   
         if (stu[i].number != 0 && stu[i].number != -1)
         {
@@ -309,7 +309,7 @@ void delete(struct STUDENT stu[], long long int delete_number)
     }
     else if (input_ornot == 1)
     {
-        for (int i = 0; i < 100; i++)
+        for (int i = 0; i < N; i++)
         {
             if (stu[i].number == delete_number)
             {
