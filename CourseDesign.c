@@ -23,7 +23,7 @@ void delete(struct STUDENT stu[], long long int);          //删除成绩
 
 int main(void)
 {
-    struct STUDENT stu[N] = {{0, " ", 0, 0, 0, 0}};        //初始化结构数组，数据0代表是空的，姓名“ ”表示空
+    struct STUDENT stu[N] = {{0, " ", 0, 0, 0, 0}};        //初始化结构数组，数据0代表是“空”的，姓名“ ”表示“空”
     char again;     //判断是否继续程序，见81行
     long long int delete_number;       //代表要删除的学生学号，见66行
     do
@@ -50,12 +50,9 @@ int main(void)
                 break;
             case '3':
                 printf("排名如下：\n\n");
-                for (int i = 0; i < rank(stu); i++)
+                for (int i = 0; i < rank(stu); i++)     //rank(stu)的返回值为学生个数
                 {
-                    if (stu[i].number != 0)
-                    {
-                        printf("第%d名: %lld %s 数学为%.1f分 程序设计为%.1f分 总分为%.1f\n", stu[i]._rank, stu[i].number, stu[i].name, stu[i].math_score, stu[i].program_score, stu[i].sum);        
-                    }
+                    printf("第%d名: %lld %s 数学为%.1f分 程序设计为%.1f分 总分为%.1f\n", stu[i]._rank, stu[i].number, stu[i].name, stu[i].math_score, stu[i].program_score, stu[i].sum);        
                 }
                 break;
             case '4':
@@ -72,7 +69,7 @@ int main(void)
                 getchar();
                 exit(0);
             default:
-                printf("????????????enter??????\n");
+                printf("你的输入有误，按enter键继续\n");
                 getchar();
         }
         do
@@ -84,11 +81,8 @@ int main(void)
             again = toupper(again);
         } while (again != 'Y' && again != 'N');
     } while (again == 'Y');
-    if (again == 'N')
-    {
         printf("\n*******************感谢使用此系统*******************\n");
         getchar();
-    }
     return 0;
 }
 
@@ -144,7 +138,7 @@ void readscore(struct STUDENT stu[])
 /* 2、显示成绩*/
 void showscore(struct STUDENT stu[])
 {
-    int input_ornot = 0;
+    int input_ornot = 0;                                                /* 判断数组各元素是否为“空”（0代表空），或者是否为-1（即结束录入时产生的-1） */
     for (int i = 0; i < N; i++)
     {   
         if (stu[i].number != 0 && stu[i].number != -1)
@@ -152,7 +146,7 @@ void showscore(struct STUDENT stu[])
             input_ornot = 1;
             break;
         }
-    }
+    }                                                                    /* 判断完毕 */       /* 下面出现此段代码时用法与此处相同 */
     if (input_ornot == 0)
     {
         printf("你还没有输入数据\n");
@@ -200,10 +194,10 @@ int rank(struct STUDENT stu[])
         {
             if (stu[k].number == -1)
             {
-                len = k;
+                len = k;        //len的数值恰好等于已录入学生的个数
             }
         }
-        for (int i = 0; i <= len - 2; i++)
+        for (int i = 0; i <= len - 2; i++)              //开始按照总分把数组元素由高到低进行冒泡排序
         {
             for (int j = i; j <= len - 1; j++)
             {
@@ -214,8 +208,8 @@ int rank(struct STUDENT stu[])
                     stu[j+1] = t;
                 }
             }
-        }
-        for (int i = 0; i < N; i++)
+        }                                               //冒泡排序结束（此时会出现同分的两人但名次相差一名的情况）
+        for (int i = 0; i < N; i++)      /* 此处依次把前一个和后一个的总分进行比较：若前后两人同分，则名次相同 */
         {
             for (int j = 1; i - j >= 0; j++)
             {
@@ -226,8 +220,8 @@ int rank(struct STUDENT stu[])
             }
             stu[i]._rank = count + 1;
             count = 0;
-        }
-        return len;
+        }                                /* 比较完毕 */
+        return len;     //返回学生的个数
     }
 }
 
