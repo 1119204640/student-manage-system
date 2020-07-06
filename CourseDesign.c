@@ -24,8 +24,8 @@ void delete(struct STUDENT stu[], long long int);          //删除成绩
 int main(void)
 {
     struct STUDENT stu[N] = {{0, " ", 0, 0, 0, 0}};        //初始化结构数组，数据0代表是“空”的，姓名“ ”表示“空”
-    char again;     //判断是否继续程序，见81行
-    long long int delete_number;       //代表要删除的学生学号，见66行
+    char again;     //判断是否继续程序
+    long long int delete_number;       //delete_number代表要删除的学生学号
     do
     {
         printf("\n");
@@ -52,7 +52,10 @@ int main(void)
                 printf("排名如下：\n\n");
                 for (int i = 0; i < rank(stu); i++)     //rank(stu)的返回值为学生个数
                 {
-                    printf("第%d名: %lld %s 数学为%.1f分 程序设计为%.1f分 总分为%.1f\n", stu[i]._rank, stu[i].number, stu[i].name, stu[i].math_score, stu[i].program_score, stu[i].sum);        
+                    if (stu[i].number != 0)
+                    {
+                        printf("第%d名: %lld %s 数学为%.1f分 程序设计为%.1f分 总分为%.1f\n", stu[i]._rank, stu[i].number, stu[i].name, stu[i].math_score, stu[i].program_score, stu[i].sum);        
+                    }
                 }
                 break;
             case '4':
@@ -67,7 +70,7 @@ int main(void)
             case '0':
                 printf("\n*******************感谢使用此系统*******************\n");
                 getchar();
-                exit(0);
+                exit(0);    //退出系统，参数为0代表正确无误地退出系统，非0时代表向系统返回错误信息后退出系统
             default:
                 printf("你的输入有误，按enter键继续\n");
                 getchar();
@@ -89,11 +92,11 @@ int main(void)
 /* 1、录入成绩 */
 void readscore(struct STUDENT stu[])
 {       
-    char overwrite = '0';
+    char overwrite = '0';       //若输入的学生学号与已录入的重复，此变量供用户选择是否覆盖之前的数据，赋值‘0’是将它初始化
     printf("下面开始录入，最多不超过100位学生，用回车隔开每位不同的学生，输入-1即可结束录入\n（格式：学号 姓名 数学成绩 程序设计成绩）\n");
     for (int i = 0; i < N; i++)
     {
-        if (stu[i].number == 0 || stu[i].number == -1)
+        if (stu[i].number == 0 || stu[i].number == -1)      //0代表“空”，-1为录入时的结束标记
         {
             scanf("%lld", &stu[i].number);
             getchar();
@@ -151,7 +154,7 @@ void showscore(struct STUDENT stu[])
     {
         printf("你还没有输入数据\n");
     }
-    else if (input_ornot == 1)
+    else
     {
         printf("\n     学号         姓名   数学成绩   程序设计成绩   总分\n");
         for (int i = 0; 1; i++)
@@ -185,7 +188,7 @@ int rank(struct STUDENT stu[])
     {
         printf("你还没有输入数据\n");
     }
-    else if (input_ornot == 1)
+    else
     {
         struct STUDENT t;      //t为临时变量存放结构
         int len;
@@ -240,7 +243,7 @@ void seek(struct STUDENT stu[])
     {
         printf("你还没有输入数据\n");
     }
-    else if (input_ornot == 1)
+    else
     {    
         long long int target;
         int find = 0;
@@ -301,7 +304,7 @@ void delete(struct STUDENT stu[], long long int delete_number)
     {
         printf("你还没有输入数据\n");
     }
-    else if (input_ornot == 1)
+    else
     {
         for (int i = 0; i < N; i++)
         {
